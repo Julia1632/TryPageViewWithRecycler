@@ -7,10 +7,12 @@ package com.trypageviewwithrecycler.Model;
 public class Item {
     private String name;
     private int lenght;
+    private String url;
 
-    public Item(String name, int lenght) {
+    public Item(String name, int lenght, String url) {
         this.name = name;
         this.lenght = lenght;
+        this.url = url;
     }
 
     public String getName() {
@@ -27,5 +29,13 @@ public class Item {
 
     public void setLenght(int lenght) {
         this.lenght = lenght;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
     }
 }

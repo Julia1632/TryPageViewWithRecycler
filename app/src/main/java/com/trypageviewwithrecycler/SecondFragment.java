@@ -31,6 +31,17 @@ public class SecondFragment extends Fragment {
 
     private String title;
     private int page;
+    String[] urls = {
+            "http://r.ddmcdn.com/s_f/o_1/cx_0/cy_0/cw_300/ch_300/w_300/APL/uploads/2014/10/kitten-cuteness300.jpg",
+            "https://cmeimg-a.akamaihd.net/640/clsd/getty/c64f76dc20c246ca88ee180fe4b4b781",
+            "http://r.ddmcdn.com/s_f/o_1/cx_462/cy_245/cw_1349/ch_1349/w_720/APL/uploads/2015/06/caturday-shutterstock_149320799.jpg",
+            "https://vetstreet.brightspotcdn.com/dims4/default/a1a90c7/2147483647/thumbnail/180x180/quality/90/?url=https%3A%2F%2Fvetstreet-brightspot.s3.amazonaws.com%2F0d%2Ff2e4c0b3a611e092fe0050568d634f%2Ffile%2Fhub-cats-senior.jpg",
+            "https://media.boingboing.net/wp-content/uploads/2017/03/surprised-cat-04.jpg",
+            "http://cdn1-www.cattime.com/assets/uploads/gallery/persian-cats-and-kittens/persian-cats-and-kittens-1.jpg", "http://r.ddmcdn.com/s_f/o_1/cx_0/cy_0/cw_300/ch_300/w_300/APL/uploads/2014/10/kitten-cuteness300.jpg",
+            "https://cmeimg-a.akamaihd.net/640/clsd/getty/c64f76dc20c246ca88ee180fe4b4b781",
+            "http://r.ddmcdn.com/s_f/o_1/cx_462/cy_245/cw_1349/ch_1349/w_720/APL/uploads/2015/06/caturday-shutterstock_149320799.jpg",
+            "https://vetstreet.brightspotcdn.com/dims4/default/a1a90c7/2147483647/thumbnail/180x180/quality/90/?url=https%3A%2F%2Fvetstreet-brightspot.s3.amazonaws.com%2F0d%2Ff2e4c0b3a611e092fe0050568d634f%2Ffile%2Fhub-cats-senior.jpg",
+            "https://media.boingboing.net/wp-content/uploads/2017/03/surprised-cat-04.jpg"};
 
     List<Item> items = new ArrayList<>();
     MyAdapter adapter;
@@ -69,7 +80,7 @@ public class SecondFragment extends Fragment {
         random10Data(0, 10);
 
         RecyclerView recyclerView = view.findViewById(R.id.recyclerView);
-        Log.e(TAG, "onCreateView: recycle" );
+        Log.e(TAG, "onCreateView: recycle");
 
         recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
         adapter = new MyAdapter(recyclerView, view.getContext(), items);
@@ -79,7 +90,7 @@ public class SecondFragment extends Fragment {
         adapter.setLoadMore(new ILoadMore() {
             @Override
             public void onLoadMore() {
-                if (items.size() <= 30) {
+                if (items.size() <= 10) {
                     items.add(null);
                     adapter.notifyItemInserted(items.size() - 1);
                     new Handler().postDelayed(new Runnable() {
@@ -107,11 +118,16 @@ public class SecondFragment extends Fragment {
     }
 
     private void random10Data(int indexStart, int indexEnd) {
-        //random data
+
         for (int i = indexStart; i < indexEnd; i++) {
             String name = UUID.randomUUID().toString();
-            Item newItem = new Item(name, name.length());
+            Item newItem = new Item(name, name.length(), geturls(i));
             items.add(newItem);
         }
+    }
+
+    private String geturls(int index) {
+
+        return urls[index % 10];
     }
 }

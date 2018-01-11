@@ -7,10 +7,12 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.trypageviewwithrecycler.Interface.ILoadMore;
+import com.trypageviewwithrecycler.Malevich;
 import com.trypageviewwithrecycler.Model.Item;
 import com.trypageviewwithrecycler.R;
 
@@ -32,11 +34,14 @@ class LoadingViewHolder extends RecyclerView.ViewHolder {
 class ItemViewHolder extends RecyclerView.ViewHolder {
 
     TextView name, number;
+    ImageView imageView;
+
 
     public ItemViewHolder(View itemView) {
         super(itemView);
-        name = (TextView) itemView.findViewById(R.id.txtName);
-        number = (TextView) itemView.findViewById(R.id.txtNumber);
+        name = itemView.findViewById(R.id.txtName);
+        number = itemView.findViewById(R.id.txtNumber);
+        imageView = (ImageView) itemView.findViewById(R.id.new_image);
     }
 }
 
@@ -106,6 +111,8 @@ public class MyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             ItemViewHolder viewHolder = (ItemViewHolder) holder;
             viewHolder.number.setText(String.valueOf(position + 1));
             viewHolder.name.setText(item.getName());
+
+            Malevich.INSTANCE.load(item.getUrl()).into(viewHolder.imageView);
         } else if (holder instanceof LoadingViewHolder) {
             LoadingViewHolder loadingHolder = (LoadingViewHolder) holder;
             loadingHolder.progressBar.setIndeterminate(true);
