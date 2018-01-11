@@ -7,21 +7,29 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.PopupMenu;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
     FragmentPagerAdapter adapterViewPager;
+    ImageView imageView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_main);
+        imageView = (ImageView) findViewById(R.id.id_image);
+        imageView.setOnClickListener(clickimage);
         Malevich.INSTANCE.setConfig(new Malevich.Config(getCacheDir()));
         ViewPager vpPager = (ViewPager) findViewById(R.id.vpPager);
         adapterViewPager = new MyPagerAdapter(getSupportFragmentManager());
         vpPager.setAdapter(adapterViewPager);
+
     }
-
-
 
 
     public static class MyPagerAdapter extends FragmentPagerAdapter {
@@ -59,4 +67,29 @@ public class MainActivity extends AppCompatActivity {
         }
 
     }
+
+    View.OnClickListener clickimage = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            showPopMenu(view);
+        }
+    };
+
+    private void showPopMenu(View view) {
+        PopupMenu popupMenu = new PopupMenu(this, view);
+        popupMenu.inflate(R.menu.popmenuitem);
+        popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                if (item.getItemId() == R.id.menu1) {
+                    Toast.makeText(getApplicationContext(),
+                            "Вы выбрали PopupMenu 1",
+                            Toast.LENGTH_SHORT).show();
+                    return true;
+                } else return false;
+            }
+        });
+        popupMenu.show();
+    }
+
 }
