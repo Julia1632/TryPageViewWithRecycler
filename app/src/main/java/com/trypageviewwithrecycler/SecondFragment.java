@@ -14,7 +14,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.trypageviewwithrecycler.Adapter.MyAdapter;
-import com.trypageviewwithrecycler.Info.Info;
 import com.trypageviewwithrecycler.Interface.ILoadMore;
 import com.trypageviewwithrecycler.Model.Item;
 
@@ -32,7 +31,7 @@ public class SecondFragment extends Fragment {
 
     private String title;
     private int page;
-    private List<Info> info10;
+
     List<Item> items = new ArrayList<>();
     MyAdapter adapter;
 
@@ -80,7 +79,7 @@ public class SecondFragment extends Fragment {
         adapter.setLoadMore(new ILoadMore() {
             @Override
             public void onLoadMore() {
-                if (items.size() <= 100) {
+                if (items.size() <= 30) {
                     items.add(null);
                     adapter.notifyItemInserted(items.size() - 1);
                     new Handler().postDelayed(new Runnable() {

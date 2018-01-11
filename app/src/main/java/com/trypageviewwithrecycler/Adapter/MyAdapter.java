@@ -18,9 +18,6 @@ import java.util.List;
 
 import static android.content.ContentValues.TAG;
 
-/**
- * Created by zigin on 11.10.2017.
- */
 
 class LoadingViewHolder extends RecyclerView.ViewHolder {
 
